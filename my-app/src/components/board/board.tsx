@@ -1,13 +1,13 @@
 import React from 'react';
 import '../style/index.css';
 import Square from '../square/square';
-
+import { ISquare } from '../../interface';
 interface BoardProps {
   squares: ISquare[];
   onClick: (i: number) => void;
 }
 
-export default function Board(props){
+export default function Board(props:BoardProps){
     const renderSquare = (i: number) => {
       return (
         <Square
