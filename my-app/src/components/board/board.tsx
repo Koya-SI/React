@@ -2,8 +2,13 @@ import React from 'react';
 import '../style/index.css';
 import Square from '../square/square';
 
+interface BoardProps {
+  squares: ISquare[];
+  onClick: (i: number) => void;
+}
+
 export default function Board(props){
-    const renderSquare = (i) => {
+    const renderSquare = (i: number) => {
       return (
         <Square
           value={props.squares[i]}
