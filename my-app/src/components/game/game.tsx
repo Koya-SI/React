@@ -2,39 +2,42 @@ import React from 'react';
 import '../style/index.css';
 import Board from '../board/board'
 import calculateWinner from '../function/calculateWinner';
+import { History } from '../../interface'
+interface GameState {
+  history: History[];
+  stepNumber: number;
+  xIsNext: boolean;
+}
 
-export default class Game extends React.Component {
-    constructor(props) {
+export default class Game extends React.Component<{}, GameState>  {
+    constructor(props: {}) {
       super(props);
       this.state = {
-        history: [{
-          squares: Array(9).fill(null)
-        }],
-        xIsNext: true,
+        history: [{ squares: Array(9).fill(null) }],
         stepNumber: 0,
+        xIsNext: true,
       };
     }
 
-    handleClick(i) {
-      const history = this.state.history;
+    handleClick(i: number) {
+      const history = this.state.history.slice(0, this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
-      squares[i] = this.state.xIsNext ? 'X' : 'O';
+      squares[i] = this.state.xIsNext ? "X" : "O";
       this.setState({
-        history: history.concat([{
-          squares: squares
-        }]),
+        history: history.concat([{ squares: squares }]),
+        stepNumber: history.length,
         xIsNext: !this.state.xIsNext,
       });
     }
-
-    jumpTo(step) {
+    
+    jumpTo(step: number) {
       this.setState({
         stepNumber: step,
-        xIsNext: (step % 2) === 0,
+        xIsNext: step % 2 === 0,
       });
     }
   
@@ -66,7 +69,7 @@ export default class Game extends React.Component {
           <div className="game-board">
             <Board 
               squares={current.squares}
-              onClick={(i)=> this.handleClick(i)}
+              onClick={(i: number) => this.handleClick(i)}
             />
           </div>
           <div className="game-info">
