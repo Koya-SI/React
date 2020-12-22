@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Square from './../square';
+import Square from '../square
 import renderer from 'react-test-renderer';
 import shallow  from 'enzyme';
 import Enzyme from 'enzyme';

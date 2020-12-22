@@ -1,8 +1,8 @@
-import React from "react";
-import "../style/index.css";
-import Board from "../board/board";
-import calculateWinner from "../function/calculateWinner";
-import { History } from "../../ISquare";
+import React from 'react';
+import '../style/index.css';
+import Board from '../board/board';
+import calculateWinner from '../function/calculateWinner';
+import {History} from '../../ISquare';
 interface GameState {
   history: History[];
   stepNumber: number;
@@ -10,7 +10,7 @@ interface GameState {
 }
 
 export default class Game extends React.Component<{}, GameState> {
-  constructor(props: {}) {
+  constructor(props: object) {
     super(props);
     this.state = {
       history: [{ squares: Array(9).fill(null) }],
@@ -26,7 +26,7 @@ export default class Game extends React.Component<{}, GameState> {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       history: history.concat([{ squares: squares }]),
       stepNumber: history.length,
@@ -46,7 +46,7 @@ export default class Game extends React.Component<{}, GameState> {
     const current = history[history.length - 1];
     const winner = calculateWinner(current.squares);
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
+      const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -56,20 +56,20 @@ export default class Game extends React.Component<{}, GameState> {
 
     let status;
     if (winner) {
-      status = "Winner: " + winner;
+      status = 'Winner: ' + winner;
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className='game'>
+        <div className='game-board'>
           <Board
             squares={current.squares}
             onClick={(i: number) => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className='game-info'>
           <div>{status}</div>
           <ol>{moves}</ol>
         </div>
