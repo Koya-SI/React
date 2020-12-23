@@ -19,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:prettier": "prettier --check src",
+    "lint": "run-p lint:prettier"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",
+    "lint": "^0.7.0",
     "prettier": "2.2.1"
   }
 }
