@@ -9,7 +9,12 @@ interface GameState {
   xIsNext: boolean;
 }
 
-export default class Game extends React.Component<{}, GameState> {
+/**
+ * @param {GameState} interface GameState.
+ * @return {JSX.Element} Board component.
+ * @extends React.Component
+ */
+export default class Game extends React.Component<unknown, GameState> {
   constructor(props: object) {
     super(props);
     this.state = {

@@ -24,3 +24,4 @@ yarn-error.log*
 
 # automatic geration file
 /.eslintcache
+/.react-app-env.d.ts
