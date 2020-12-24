@@ -1,3 +1,8 @@
+/**
+ * @param {props} squares
+ * @return {square[]}
+ * @return {null}
+ */
 export default function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],

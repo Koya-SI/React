@@ -11,19 +11,26 @@ interface GameState {
 
 /**
  * @param {GameState} interface GameState.
- * @return {JSX.Element} Board component.
+ * @return {JSX.Element} Game component.
  * @extends React.Component
  */
 export default class Game extends React.Component<unknown, GameState> {
-  constructor(props: object) {
+/**
+ * @constructor
+ * @param {props} props
+ */
+  constructor(props: GameState) {
     super(props);
     this.state = {
-      history: [{ squares: Array(9).fill(null) }],
+      history: [{squares: Array(9).fill(null)}],
       stepNumber: 0,
       xIsNext: true,
     };
   }
 
+  /**
+ * @param {number} i
+ */
   handleClick(i: number) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -33,12 +40,15 @@ export default class Game extends React.Component<unknown, GameState> {
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      history: history.concat([{ squares: squares }]),
+      history: history.concat([{squares: squares}]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
   }
 
+  /**
+ * @param {number} step
+ */
   jumpTo(step: number) {
     this.setState({
       stepNumber: step,
@@ -46,6 +56,9 @@ export default class Game extends React.Component<unknown, GameState> {
     });
   }
 
+  /**
+ * @return {JSX.Element}
+ */
   render() {
     const history = this.state.history;
     const current = history[history.length - 1];
