@@ -41,6 +41,7 @@
             "selector": "TSEnumDeclaration",
             "message": "Don't declare enums"
           }
-        ]
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "off"
       }
   }
