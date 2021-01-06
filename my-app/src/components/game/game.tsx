@@ -22,7 +22,7 @@ export default class Game extends React.Component<unknown, GameState> {
   constructor(props: GameState) {
     super(props);
     this.state = {
-      history: [{squares: Array(9).fill(null), location: []}],
+      history: [{squares: Array(9).fill(null)}],
       stepNumber: 0,
       xIsNext: true,
     };
@@ -35,7 +35,6 @@ export default class Game extends React.Component<unknown, GameState> {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const location = current.location.slice();
     if (calculateWinner(squares).winner || squares[i]) {
       return;
     }
@@ -44,7 +43,6 @@ export default class Game extends React.Component<unknown, GameState> {
       history: history.concat([
         {
           squares: squares,
-          location: location,
         },
       ]),
       stepNumber: history.length,
@@ -69,7 +67,7 @@ export default class Game extends React.Component<unknown, GameState> {
     const history = this.state.history;
     const current = history[history.length - 1];
     const calcResult = calculateWinner(current.squares);
-    const moves = history.map((step, move) => {
+    const moves = history.map((step: History, move: number) => {
       const desc = move ? 'Go to move #' + move : 'Go to game start';
       return (
         <li key={move}>
@@ -88,6 +86,8 @@ export default class Game extends React.Component<unknown, GameState> {
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
+
+    console.log(status);
 
     return (
       <div className='game'>

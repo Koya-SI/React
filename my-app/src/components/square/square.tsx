@@ -3,7 +3,6 @@ import {ISquare} from '../../ISquare';
 interface SquareProps {
   value: ISquare;
   onClick: () => void;
-  isHighlighted: boolean;
 }
 
 /**
@@ -12,12 +11,8 @@ interface SquareProps {
  * @return {JSX.Element} button.
  */
 export default function Square(props: SquareProps) {
-  let className = 'square';
-  if (props.isHighlighted) {
-    className += ' highlighted';
-  }
   return (
-    <button className={className} onClick={props.onClick}>
+    <button className={'square'} onClick={props.onClick}>
       {props.value}
     </button>
   );
