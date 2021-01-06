@@ -14,7 +14,7 @@ interface SquareProps {
 export default function Square(props: SquareProps) {
   let className = 'square';
   if (props.isHighlighted) {
-    className += ' highlighted';
+    className += 'highlighted';
   }
   return (
     <button className={className} onClick={props.onClick}>

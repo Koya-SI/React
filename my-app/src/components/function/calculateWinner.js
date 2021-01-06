@@ -22,7 +22,7 @@ export default function calculateWinner(squares) {
         line: lines[i],
       };
     }
-    if (squares.every((s) => s)) {
+    if (squares.every((value) => value)) {
       return {
         winner: 'DRAW',
         line: null,
