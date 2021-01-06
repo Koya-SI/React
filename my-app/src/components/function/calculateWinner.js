@@ -16,22 +16,9 @@ export default function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    console.log('test + ' + squares[a] + squares[b] + squares[c]);
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return {
-        winner: squares[a],
-        line: lines[i],
-      };
+      return squares[a];
     }
-    if (squares.every((square) => square)) {
-      return {
-        winner: 'DRAW',
-        line: null,
-      };
-    }
-    return {
-      winner: null,
-      line: null,
-    };
   }
+  return;
 }

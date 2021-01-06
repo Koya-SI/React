@@ -5,7 +5,6 @@ import {ISquare} from '../../ISquare';
 interface BoardProps {
   squares: ISquare[];
   onClick: (i: number) => void;
-  winLine: number[];
 }
 
 /**
