@@ -7,6 +7,7 @@ interface GameState {
   history: History[];
   stepNumber: number;
   xIsNext: boolean;
+  movesIsAsc: boolean,
 }
 
 /**
@@ -25,6 +26,7 @@ export default class Game extends React.Component<unknown, GameState> {
       history: [{squares: Array(9).fill(null), selected: 0}],
       stepNumber: 0,
       xIsNext: true,
+      movesIsAsc: true,
     };
   }
 
@@ -58,6 +60,15 @@ export default class Game extends React.Component<unknown, GameState> {
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0,
+    });
+  }
+
+  /**
+ * @param {null} void
+ */
+  sortMoves() {
+    this.setState({
+      movesIsAsc: !this.state.movesIsAsc,
     });
   }
 
@@ -101,7 +112,13 @@ export default class Game extends React.Component<unknown, GameState> {
         </div>
         <div className='game-info'>
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>
+            <button onClick={() => this.sortMoves()}>
+              {this.state.movesIsAsc ? 'Sort descending' : 'Sort ascending'}
+            </button>
+          </div>
+          {this.state.movesIsAsc ? <ol>{moves}</ol>:
+           <ol reversed>{moves.reverse()}</ol>}
         </div>
       </div>
     );
