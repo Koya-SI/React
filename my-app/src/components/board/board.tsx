@@ -29,11 +29,19 @@ export default function Board(props: BoardProps) {
     return <div className="board-row">{renderSquares(i)}</div>;
   };
 
+  const board = () => {
+    const colum = [];
+    for (let i = 0; i < 9;) {
+      colum.push(renderRows(i));
+      i += 3;
+    }
+    return colum;
+  };
+
+
   return (
     <div>
-      {renderRows(0)}
-      {renderRows(3)}
-      {renderRows(6)}
+      {board()}
     </div>
   );
 }
