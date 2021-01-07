@@ -5,7 +5,6 @@ import {ISquare} from '../../ISquare';
 interface BoardProps {
   squares: ISquare[];
   onClick: (i: number) => void;
-  winLine: number[];
 }
 
 /**
@@ -14,30 +13,35 @@ interface BoardProps {
  * @return {JSX.Element} Square component.
  */
 export default function Board(props: BoardProps) {
-  const renderSquare = (i: number, isHighlighted: boolean) => {
-    return <Square value={props.squares[i]} onClick={() => props.onClick(i)}
-      isHighlighted={isHighlighted} />;
+  const renderSquare = (i: number) => {
+    return <Square value={props.squares[i]} onClick={() => props.onClick(i)}/>;
   };
-  const highlight = props.winLine && props.winLine.includes(0 || 1 || 2 || 3 ||
-     4 || 5 || 6 || 7 || 8);
+
+  const renderSquares = (n: number) => {
+    const squares = [];
+    for (let i = n; i < n + 3; i++) {
+      squares.push(renderSquare(i));
+    }
+    return squares;
+  };
+
+  const renderRows = (i: number) => {
+    return <div className="board-row">{renderSquares(i)}</div>;
+  };
+
+  const board = () => {
+    const colum = [];
+    for (let i = 0; i < 9;) {
+      colum.push(renderRows(i));
+      i += 3;
+    }
+    return colum;
+  };
+
 
   return (
     <div>
-      <div className='board-row'>
-        {renderSquare(0, highlight)}
-        {renderSquare(1, highlight)}
-        {renderSquare(2, highlight)}
-      </div>
-      <div className='board-row'>
-        {renderSquare(3, highlight)}
-        {renderSquare(4, highlight)}
-        {renderSquare(5, highlight)}
-      </div>
-      <div className='board-row'>
-        {renderSquare(6, highlight)}
-        {renderSquare(7, highlight)}
-        {renderSquare(8, highlight)}
-      </div>
+      {board()}
     </div>
   );
 }

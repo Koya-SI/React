@@ -12,5 +12,4 @@ export type Locations = [
 ];
 export interface History {
   squares: ISquare[];
-  location: Locations[];
 }
