@@ -3,6 +3,7 @@ import {ISquare} from '../../ISquare';
 interface SquareProps {
   value: ISquare;
   onClick: () => void;
+  isWinning: boolean;
 }
 
 /**
@@ -12,7 +13,8 @@ interface SquareProps {
  */
 export default function Square(props: SquareProps) {
   return (
-    <button className={'square'} onClick={props.onClick}>
+    <button className={'square' +
+     (props.isWinning ? ' square--winning' : '')} onClick={props.onClick}>
       {props.value}
     </button>
   );

@@ -7,7 +7,7 @@ interface GameState {
   history: History[];
   stepNumber: number;
   xIsNext: boolean;
-  movesIsAsc: boolean,
+  movesIsAsc: boolean;
 }
 
 /**
@@ -37,7 +37,7 @@ export default class Game extends React.Component<unknown, GameState> {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares).winner || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -78,7 +78,7 @@ export default class Game extends React.Component<unknown, GameState> {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const calcResult = calculateWinner(current.squares);
     const moves = history.map((step: History, move: number) => {
       const desc = move ?
       'Go to move #' + move + ' (' + (step.selected % 3 + 1) + ', ' +
@@ -94,8 +94,8 @@ export default class Game extends React.Component<unknown, GameState> {
     });
 
     let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
+    if (calcResult.winner) {
+      status = 'Winner: ' + calcResult.winner;
     } else if (!current.squares.includes(null)) {
       status = 'Draw';
     } else {
@@ -108,7 +108,7 @@ export default class Game extends React.Component<unknown, GameState> {
           <Board
             squares={current.squares}
             onClick={(i: number) => this.handleClick(i)}
-          />
+            winningSquares={calcResult.line} />
         </div>
         <div className='game-info'>
           <div>{status}</div>
