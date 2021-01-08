@@ -5,6 +5,7 @@ import {ISquare} from '../../ISquare';
 interface BoardProps {
   squares: ISquare[];
   onClick: (i: number) => void;
+  winningSquares: number[];
 }
 
 /**
@@ -14,7 +15,8 @@ interface BoardProps {
  */
 export default function Board(props: BoardProps) {
   const renderSquare = (i: number) => {
-    return <Square value={props.squares[i]} onClick={() => props.onClick(i)}/>;
+    return <Square value={props.squares[i]} onClick={() => props.onClick(i)}
+      isWinning={props.winningSquares.includes(i)}/>;
   };
 
   const renderSquares = (n: number) => {
@@ -37,7 +39,6 @@ export default function Board(props: BoardProps) {
     }
     return colum;
   };
-
 
   return (
     <div>
